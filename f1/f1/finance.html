@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>代客理财系统</title>
+	<!--
+	<link rel="stylesheet" href="./jquery-ui-1.9.2/themes/base/jquery-ui.css">
+-->
+	<link rel="stylesheet" href="./jquery-ui-1.10.0.custom/css/ui-darkness/jquery-ui-1.10.0.custom.css">
+
+	<link rel="stylesheet" href="./demos.css">
+	<link rel="stylesheet" href="./scroll/css/jquery.ui.scrollbar.css" type="text/css" media="all" />
+<!--	<link rel="stylesheet" href="./scroll/css/themes/greyshade.css" type="text/css" media="all" /> -->
+<!--
+	<script src="./jquery-ui-1.9.2/jquery-1.8.3.js"></script>
+	<script src="./jquery-ui-1.9.2/ui/jquery-ui.js"></script>
+	-->
+	<script src="./jquery-ui-1.10.0.custom/js/jquery-1.9.0.js"></script>
+	<script src="./jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.js"></script>
+
+	<script type="text/javascript" src="./scroll/js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="./scroll/js/jquery.ui.scrollbar.min.js"></script>
+	
+	<style>
+		body { font-size: 62.5%;}
+		label, input, select { display:block; }
+		label{padding-left: 5px;}
+		input.text, select{ margin-bottom:5px; width:85%; padding: .4em; }
+		fieldset { padding:0; border:0; margin-top:25px; }
+		#account-status fieldset, div#current-status fieldset{ padding:0; border:0; margin-top:5px; }
+		h1 { font-size: 1.2em; margin: .6em 0; }
+		/*div.users-contain { width: 350px; margin: 20px 0; }*/
+		div.users-contain table { margin: 1em 0; border-collapse: collapse; width: 90%; }
+		div.users-contain table td, div.users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+		.ui-dialog .ui-state-error { padding: .3em; }
+		.validateTips { border: 1px solid transparent; padding: 0.3em; }
+		div#account-status { width: 20%; margin: 10px;float: right;}
+		div#current-status { width: 20%; margin: 10px;float: left;}
+		div#all-list{width: 50%;  margin: 10px;float: left;}
+		div#scroll-table{height:300px;width:80%}
+		div#all-list #list-head{width:70%}
+		div#all-buttons{clear: both; margin-bottom: 20px; margin-left: 10px}
+		div h1.ui-widget-header{height: 25px; vertical-align: center; padding-left: 10px;}
+		div#user-operations{width: 100%;}
+	</style>
+	<script type="text/javascript" src="./finance.js">
+	</script>
+</head>
+<body class="ui-widget-content">
+<div id="current-status" class="ui-widget">
+	<h1 class="ui-widget-header ui-corner-all">当前用户账户资金状态:</h1>
+	<form>
+	<fieldset>
+		<label for="name">净值</label>
+		<input type="text" disabled="true" name="netvalue" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">余额</label>
+		<input type="text" disabled="true" name="balance" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">浮动盈亏</label>
+		<input type="text" disabled="true" name="profitloss" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">可用保证金</label>
+		<input type="text" disabled="true" name="availabledeposit" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">占用保证金</label>
+		<input type="text" disabled="true" name="useddeposit" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">冻结保证金</label>
+		<input type="text" disabled="true" name="frozendeposit" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">风险率（100%）</label>
+		<input type="text" disabled="true" name="risk" value="---" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
+<div id="all-list" class="ui-widget users-contain">
+	<h1 class="ui-widget-header ui-corner-all">商品目录:</h1>
+	<table id="list-head" class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>选择</th>
+				<th>商品代码</th>
+				<th>商品名称</th>
+				<th>卖价格</th>
+				<th>买价格</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="scroll-table">
+	<table  class="ui-widget ui-widget-content">
+		<tbody>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="product"/></td>
+				<td>XAUUSD</td>
+				<td>伦敦金</td>
+				<td>1752.4</td>
+				<td>1752.9</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+<div id="account-status" class="ui-widget">
+	<h1 class="ui-widget-header ui-corner-all">当前用户账号信息:</h1>
+	<form>
+	<fieldset>
+		<label for="name">登录账号</label>
+		<input type="text" name="userid" disabled="true" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">客户姓名</label>
+		<input type="text" name="username" disabled="true" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">机构</label>
+		<input type="text" name="org" disabled="true" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">经纪人</label>
+		<input type="text" name="agent" disabled="true" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">电话</label>
+		<input type="text" name="telephone" disabled="true" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">银行名称</label>
+		<input type="text" name="bankname" disabled="true" value="---" class="text ui-widget-content ui-corner-all" />
+		<label for="email">银行账号</label>
+		<input type="text" name="bankaccount" disabled="true" value="---" class="text ui-widget-content ui-corner-all" />
+		<button id="button-logout">退出</button>
+	</fieldset>
+	</form>
+	
+</div>
+<div id="all-buttons" class="ui-widget">
+	<button id="button-login">登录</button><button id="button-buy">市价建仓</button>
+	<button id="button-sell">市价平仓</button><button id="button-stay">挂单</button>
+</div>
+<div id="user-operations">
+	<ul>
+		<li><a href="#buy-list">持仓单明细</a></li>
+		<li><a href="#buy-total">持仓单汇总</a></li>
+		<li><a href="#stay-list">挂单明细</a></li>
+	</ul>
+	<div id="buy-list">
+		<div class="ui-widget users-contain">
+	<table class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>选择</th>
+				<th>单号</th>
+				<th>商品代码</th>
+				<th>商品名称</th>
+				<th>操作类型</th>
+				<th>买/卖</th>
+				<th>数量</th>
+				<th>建仓价</th>
+				<th>现价</th>
+				<th>止损价</th>
+				<th>止盈价</th>
+				<th>浮动盈亏</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>100</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>102000</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>100</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>100</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+	</div>
+	<div id="buy-total">
+		<div class="ui-widget users-contain">
+	<table class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>选择</th>
+				<th>单号</th>
+				<th>商品代码</th>
+				<th>商品名称</th>
+				<th>操作类型</th>
+				<th>买/卖</th>
+				<th>数量</th>
+				<th>建仓价</th>
+				<th>现价</th>
+				<th>止损价</th>
+				<th>止盈价</th>
+				<th>浮动盈亏</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>100555</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>100</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+	</div>
+	<div id="stay-list">
+		<div class="ui-widget users-contain">
+	<table class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>选择</th>
+				<th>单号</th>
+				<th>商品代码</th>
+				<th>商品名称</th>
+				<th>操作类型</th>
+				<th>买/卖</th>
+				<th>数量</th>
+				<th>建仓价</th>
+				<th>现价</th>
+				<th>止损价</th>
+				<th>止盈价</th>
+				<th>浮动盈亏</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>102000</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>100</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="operation"/></td>
+				<td>100</td>
+				<td>XXXX</td>
+				<td>伦敦黄金</td>
+				<td>挂单</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+	</div>
+</div>
+
+<div id="dialog-login" title="登录">
+	<p class="validateTips">所有项均为必填</p>
+	<form>
+	<fieldset>
+		<label for="name">登录账号</label>
+		<input type="text" name="login-userid" id="login-userid" class="text ui-widget-content ui-corner-all" />
+		<label for="email">电话密码</label>
+		<input type="text" name="login-password" id="login-password" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
+
+<div id="dialog-buy" title="市价建仓">
+	<form>
+	<fieldset>
+		<label for="name">商品</label>
+		<select class="text ui-widget-content ui-corner-all"><option>伦敦金</option><option>伦敦金</option><option>伦敦金</option></select>
+		<label for="email">手数</label>
+		<select class="text ui-widget-content ui-corner-all"><option>1.00</option><option>2.00</option><option>3.00</option></select>
+		<label for="">止损价</label>
+		<input type="text" disabled="true" value="0" class="text ui-widget-content ui-corner-all" />
+		<label for="">获利价</label>
+		<input type="text" disabled="true" value="0" class="text ui-widget-content ui-corner-all" />
+		<label for="">注释</label>
+		<input type="text" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="">市价成交</label>
+		<input type="text" disabled="true" value="0.82327/0.8240" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
+
+<div id="dialog-sell" title="市价平仓">
+	<form>
+	<fieldset>
+		<label for="">单号</label>
+		<input type="text" value="123123123" disabled="true"  class="text ui-widget-content ui-corner-all" />
+		<label for="name">商品</label>
+		<select disabled="true" class="text ui-widget-content ui-corner-all">
+			<option>伦敦金</option><option>伦敦金</option><option>伦敦金</option></select>
+		<label for="email">手数</label>
+		<select class="text ui-widget-content ui-corner-all">
+			<option>1.00</option><option>2.00</option><option>3.00</option></select>
+		<label for="">交易方向</label>
+		<input type="radio" disabled="true" checked="true" style="display:inline;width:10%" class="text ui-widget-content ui-corner-all" />买
+		<input type="radio" disabled="true" style="display:inline;width:10%" class="text ui-widget-content ui-corner-all" />卖
+		<label for="">交易价格</label>
+		<input type="text" disabled="true" value="1752.90" class="text ui-widget-content ui-corner-all" />
+		<label for="">备注</label>
+		<input type="text" disabled="true" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
+<div id="dialog-stay" title="挂单">
+	<form>
+	<fieldset>
+		<label for="name">商品</label>
+		<select class="text ui-widget-content ui-corner-all"><option>伦敦金</option><option>伦敦金</option><option>伦敦金</option></select>
+		<label for="email">手数</label>
+		<select class="text ui-widget-content ui-corner-all"><option>1.00</option><option>2.00</option><option>3.00</option></select>
+		<label for="">止损价</label>
+		<input type="text" disabled="true" value="0" class="text ui-widget-content ui-corner-all" />
+		<label for="">获利价</label>
+		<input type="text" disabled="true" value="0" class="text ui-widget-content ui-corner-all" />
+		<label for="">注释</label>
+		<input type="text" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="">类型</label>
+		<select class="text ui-widget-content ui-corner-all">
+			<option>Buy Limit</option><option>Buy Stop</option><option>Sell Limit</option><option>Sell Stop</option>
+		</select>
+		<label for="">价位</label>
+		<input type="text" disabled="true" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="">截至日期</label>
+		<input type="text" disabled="true" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
+</body>
+</html>
