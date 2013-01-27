@@ -74,12 +74,8 @@ $(function() {
 			});
 	$( "#button-buy" ).button().click(buttonBuyClick);
 	$( "#button-sell" ).button().click(buttonSellClick);
-	$( "#button-stay" ).button().click(function() {
-				$( "#dialog-stay" ).dialog( "open" );
-			});
-	$( "#button-logout" ).button().click(function() {
-				alert("成功退出");	
-			});
+	$( "#button-stay" ).button().click(buttonStayClick);
+	$( "#button-logout" ).button().click(buttonLogoutClick);
 	$( "#user-operations" ).tabs();
 	$("#scroll-table").scrollbar({orientation: 'vertical'});
 	$("input[type='radio']").click(function(){
@@ -166,6 +162,26 @@ function buttonSellClick(){
 		var productNameElem = productIdElem.next();
 		$("#dialog-sell #buy-id").val(buyIdElem.text());
 		$("#dialog-sell #sell-product").val(productIdElem.text()+"/"+productNameElem.text());
-		$( "#dialog-sell" ).dialog( "open" );
+		$("#dialog-sell").dialog("open");
 	}
+}
+
+function buttonStayClick(){
+	var productRadio = $("div#all-list input[type='radio']:checked");
+	if(productRadio.length != 1){
+		alert("请选择一个商品");
+		return;
+	}else{
+		var productIdElem = productRadio.parent().next();
+		var productNameElem = productIdElem.next();
+		var productSellElem = productNameElem.next();
+		var productBuyElem = productSellElem.next();
+		$("#dialog-stay #stay-product").val(productIdElem.text()+"/"+productNameElem.text());
+
+		$( "#dialog-stay" ).dialog("open");
+	}
+}
+
+function buttonLogoutClick(){
+	alert("logout successfully!");
 }
