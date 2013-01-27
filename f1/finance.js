@@ -78,7 +78,7 @@ $(function() {
 	$( "#button-logout" ).button().click(buttonLogoutClick);
 	$( "#user-operations" ).tabs();
 	$("#scroll-table").scrollbar({orientation: 'vertical'});
-	$("input[type='radio']").click(function(){
+	$("input[type='radio']").on("click", function(){
 		$(this).parent().parent().siblings().removeClass("ui-state-active");
 		$(this).parent().parent().addClass("ui-state-active");
 	});
@@ -98,14 +98,13 @@ function userLogin(){
 			"userid": userid,
 			"password": password
 		},
-		url: "login.do",
+		url: "./login.xml",
 		success: loginSuccess,
 		error:function(){
 			alert("登陆失败");
-		}
+		},
+		async:false
 	});
-	alert("登陆成功");
-	$( this ).dialog( "close" );
 }
 function updateTips(tips, container){
 	container.text(tips).addClass("ui-state-highlight");
@@ -124,14 +123,14 @@ function loginSuccess(data){
 	$("[name='bankaccount']", account).val($("bankaccount", data).text());
 
 	var current = $("#current-status")
-	$("[name='netvalue']", account).val($("netvalue", data).text());
-	$("[name='balance']", account).val($("balance", data).text());
-	$("[name='profitloss']", account).val($("profitloss", data).text());
-	$("[name='availabledeposit']", account).val($("availabledeposit", data).text());
-	$("[name='useddeposit']", account).val($("useddeposit", data).text());
-	$("[name='frozendeposit']", account).val($("frozendeposit", data).text());
-	$("[name='risk']", account).val($("risk", data).text());
-
+	$("[name='netvalue']", current).val($("netvalue", data).text());
+	$("[name='balance']", current).val($("balance", data).text());
+	$("[name='profitloss']", current).val($("profitloss", data).text());
+	$("[name='availabledeposit']", current).val($("availabledeposit", data).text());
+	$("[name='useddeposit']", current).val($("useddeposit", data).text());
+	$("[name='frozendeposit']", current).val($("frozendeposit", data).text());
+	$("[name='risk']", current).val($("risk", data).text());
+	$( "#dialog-login" ).dialog( "close" );
 }
 
 function buttonBuyClick(){
