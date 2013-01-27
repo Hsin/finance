@@ -72,12 +72,8 @@ $(function() {
 	$( "#button-login" ).button().click(function() {
 				$( "#dialog-login" ).dialog( "open" );
 			});
-	$( "#button-buy" ).button().click(function() {
-				$( "#dialog-buy" ).dialog( "open" );
-			});
-	$( "#button-sell" ).button().click(function() {
-				$( "#dialog-sell" ).dialog( "open" );
-			});
+	$( "#button-buy" ).button().click(buttonBuyClick);
+	$( "#button-sell" ).button().click(buttonSellClick);
 	$( "#button-stay" ).button().click(function() {
 				$( "#dialog-stay" ).dialog( "open" );
 			});
@@ -140,4 +136,36 @@ function loginSuccess(data){
 	$("[name='frozendeposit']", account).val($("frozendeposit", data).text());
 	$("[name='risk']", account).val($("risk", data).text());
 
+}
+
+function buttonBuyClick(){
+	var productRadio = $("div#all-list input[type='radio']:checked");
+	if(productRadio.length != 1){
+		alert("请选择一个商品");
+		return;
+	}else{
+		var productIdElem = productRadio.parent().next();
+		var productNameElem = productIdElem.next();
+		var productSellElem = productNameElem.next();
+		var productBuyElem = productSellElem.next();
+		$("#dialog-buy #buy-product").val(productIdElem.text()+"/"+productNameElem.text());
+		$("#dialog-buy #buy-sell-price").val("卖"+productSellElem.text() + "/" + "买" + productBuyElem.text());
+
+		$( "#dialog-buy" ).dialog("open");
+	}
+}
+
+function buttonSellClick(){
+	var sellRadio = $("div#buy-list input[type='radio']:checked");
+	if (sellRadio.length != 1) {
+		alert("请选择一项平仓单");
+		return;
+	}else{
+		var buyIdElem = sellRadio.parent().next();
+		var productIdElem = buyIdElem.next();
+		var productNameElem = productIdElem.next();
+		$("#dialog-sell #buy-id").val(buyIdElem.text());
+		$("#dialog-sell #sell-product").val(productIdElem.text()+"/"+productNameElem.text());
+		$( "#dialog-sell" ).dialog( "open" );
+	}
 }

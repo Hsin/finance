@@ -86,35 +86,35 @@
 		<tbody>
 			<tr>
 				<td><input type="radio" name="product"/></td>
-				<td>XAUUSD</td>
+				<td>XAUUSD1</td>
 				<td>伦敦金</td>
 				<td>1752.4</td>
 				<td>1752.9</td>
 			</tr>
 			<tr>
 				<td><input type="radio" name="product"/></td>
-				<td>XAUUSD</td>
+				<td>XAUUSD2</td>
 				<td>伦敦金</td>
 				<td>1752.4</td>
 				<td>1752.9</td>
 			</tr>
 			<tr>
 				<td><input type="radio" name="product"/></td>
-				<td>XAUUSD</td>
+				<td>XAUUSD3</td>
 				<td>伦敦金</td>
 				<td>1752.4</td>
 				<td>1752.9</td>
 			</tr>
 			<tr>
 				<td><input type="radio" name="product"/></td>
-				<td>XAUUSD</td>
+				<td>XAUUSD4</td>
 				<td>伦敦金</td>
 				<td>1752.4</td>
 				<td>1752.9</td>
 			</tr>
 			<tr>
 				<td><input type="radio" name="product"/></td>
-				<td>XAUUSD</td>
+				<td>XAUUSD5</td>
 				<td>伦敦金</td>
 				<td>1752.4</td>
 				<td>1752.9</td>
@@ -247,7 +247,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="radio" name="operation"/></td>
+				<td><input type="radio" name="buy-item"/></td>
 				<td>100</td>
 				<td>XXXX</td>
 				<td>伦敦黄金</td>
@@ -261,7 +261,7 @@
 				<td></td>
 			</tr>
 		<tr>
-				<td><input type="radio" name="operation"/></td>
+				<td><input type="radio" name="buy-item"/></td>
 				<td>102000</td>
 				<td>XXXX</td>
 				<td>伦敦黄金</td>
@@ -275,7 +275,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td><input type="radio" name="operation"/></td>
+				<td><input type="radio" name="buy-item"/></td>
 				<td>100</td>
 				<td>XXXX</td>
 				<td>伦敦黄金</td>
@@ -289,7 +289,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td><input type="radio" name="operation"/></td>
+				<td><input type="radio" name="buy-item"/></td>
 				<td>100</td>
 				<td>XXXX</td>
 				<td>伦敦黄金</td>
@@ -311,7 +311,6 @@
 	<table class="ui-widget ui-widget-content">
 		<thead>
 			<tr class="ui-widget-header ">
-				<th>选择</th>
 				<th>单号</th>
 				<th>商品代码</th>
 				<th>商品名称</th>
@@ -327,7 +326,6 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="radio" name="operation"/></td>
 				<td>100555</td>
 				<td>XXXX</td>
 				<td>伦敦黄金</td>
@@ -341,7 +339,6 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td><input type="radio" name="operation"/></td>
 				<td>100</td>
 				<td>XXXX</td>
 				<td>伦敦黄金</td>
@@ -441,9 +438,9 @@
 <div id="dialog-buy" title="市价建仓">
 	<form>
 	<fieldset>
-		<label for="name">商品</label>
-		<select class="text ui-widget-content ui-corner-all"><option>伦敦金</option><option>伦敦金</option><option>伦敦金</option></select>
-		<label for="email">手数</label>
+		<label for="">商品</label>
+		<input name="product" id="buy-product" type="text" disabled="true" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="">手数</label>
 		<select class="text ui-widget-content ui-corner-all"><option>1.00</option><option>2.00</option><option>3.00</option></select>
 		<label for="">止损价</label>
 		<input type="text" disabled="true" value="0" class="text ui-widget-content ui-corner-all" />
@@ -452,7 +449,7 @@
 		<label for="">注释</label>
 		<input type="text" value="" class="text ui-widget-content ui-corner-all" />
 		<label for="">市价成交</label>
-		<input type="text" disabled="true" value="0.82327/0.8240" class="text ui-widget-content ui-corner-all" />
+		<input type="text" id="buy-sell-price" disabled="true" value="0.82327/0.8240" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	</form>
 </div>
@@ -461,11 +458,10 @@
 	<form>
 	<fieldset>
 		<label for="">单号</label>
-		<input type="text" value="123123123" disabled="true"  class="text ui-widget-content ui-corner-all" />
+		<input id="buy-id" type="text" disabled="true"  class="text ui-widget-content ui-corner-all" />
 		<label for="name">商品</label>
-		<select disabled="true" class="text ui-widget-content ui-corner-all">
-			<option>伦敦金</option><option>伦敦金</option><option>伦敦金</option></select>
-		<label for="email">手数</label>
+		<input id="sell-product" type="text" disabled="true" class="text ui-widget-content ui-corner-all" />
+		<label for="">手数</label>
 		<select class="text ui-widget-content ui-corner-all">
 			<option>1.00</option><option>2.00</option><option>3.00</option></select>
 		<label for="">交易方向</label>
